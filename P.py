@@ -23,7 +23,16 @@ if len(folk) < 3:
     print("No hay suficientes personas para elegir 3 ganadores")
 else:
     ganadores = random.sample(folk, 3)
+    print("=== GANADORES ===")
+    
+    for persona in ganadores:
+        # Filtrar boletos de la persona
+        boletos_persona = [num for num, nombre in boletos.items() if nombre == persona]
+        
+        # Seleccionar aleatoriamente un boleto de esa persona
+        boleto_ganador = random.choice(boletos_persona)
+        
+        print(f"Persona: {persona} | Boleto ganador: {boleto_ganador}")
 
-# ya nada mas aqui ponle que itere en la lista de ganadores obtenida en el else 
-#que se identifiquen los boletos que son de la misma persona poara que no pueda ganr dos veces 
-#que se selecione aleatoriamente uno de los boletos y muestre el nombre de la persona con el numero del boleto ganador
+
+# TERMINADO 
