@@ -1,19 +1,19 @@
 📄-Sistema de Sorteo en Python
-1. Descripción general
+¿Qué hace este programa?
 
-Este programa realiza un sorteo aleatorio de ganadores a partir de un conjunto de boletos asociados a distintas personas.
-El objetivo es seleccionar 3 personas ganadoras distintas y asignar a cada una uno de sus boletos de manera aleatoria.
+Es un sorteo de 3 ganadores usando una lista de boletos.
+Cada boleto tiene un número y está asignado a una persona.
 
-El sistema está diseñado para garantizar que:
+La idea es:
 
-No se repitan personas ganadoras.
+Elegir 3 personas distintas al azar
 
-Cada ganador tenga exactamente un boleto asignado.
+Y a cada una asignarle uno de sus boletos, también al azar
 
-El sorteo solo se realice si hay al menos 3 personas distintas.
+📦 Datos de entrada
 
-2. Estructura de datos
-Diccionario boletos
+Los boletos están en un diccionario:
+
 boletos = {
     1: "Limon",
     2: "Limon",
@@ -30,84 +30,52 @@ boletos = {
 }
 
 
-Clave (key): número de boleto (entero).
+La clave es el número de boleto
 
-Valor (value): nombre de la persona propietaria del boleto (cadena de texto).
+El valor es la persona dueña de ese boleto
 
-Una persona puede tener uno o varios boletos.
+Una persona puede tener varios boletos
 
-3. Obtención de personas únicas
+👥 Personas participantes
 folk = list(set(boletos.values()))
 
 
-boletos.values() obtiene todos los nombres.
+Aquí se sacan las personas únicas, quitando duplicados.
+Ojo: Python distingue mayúsculas y minúsculas, así que
+"trikitrakatelas" y "Trikitrakatelas" cuentan como personas distintas.
 
-set() elimina duplicados.
-
-list() convierte el conjunto en una lista utilizable.
-
-📌 Nota importante:
-Python distingue entre mayúsculas y minúsculas, por lo que:
-
-"trikitrakatelas" y "Trikitrakatelas" se consideran personas distintas.
-
-4. Validación de participantes mínimos
+✅ Validación básica
 if len(folk) < 3:
     print("No hay suficientes personas para elegir 3 ganadores")
 
 
-Se verifica que existan al menos 3 personas distintas.
+Si no hay al menos 3 personas diferentes, no se hace el sorteo.
 
-Si no se cumple la condición, el sorteo no se realiza.
-
-5. Selección de ganadores
+🎲 Sorteo de ganadores
 ganadores = random.sample(folk, 3)
 
 
-random.sample() selecciona 3 personas distintas al azar.
+Se eligen 3 personas sin repetir.
+Todas tienen la misma probabilidad, sin importar cuántos boletos tengan.
 
-Todas las personas tienen la misma probabilidad de ser elegidas, sin importar cuántos boletos tengan.
+🎟️ Elección del boleto ganador
 
-6. Asignación del boleto ganador
+Para cada persona ganadora:
+
+Se buscan todos sus boletos
+
+Se elige uno al azar
+
 boletos_persona = [
     num for num, nombre in boletos.items() if nombre == persona
 ]
 boleto_ganador = random.choice(boletos_persona)
 
+🖨️ Resultado final
 
-Para cada persona ganadora:
-
-Se filtran todos los boletos que le pertenecen.
-
-Se elige un boleto al azar de esa lista.
-
-Se muestra el resultado en pantalla.
-
-7. Salida del programa
-
-Ejemplo de salida:
+Se imprime algo como:
 
 === GANADORES ===
-Persona: Ana | Boleto ganador: 9
-Persona: Manuel | Boleto ganador: 6
-Persona: Tania | Boleto ganador: 8
-
-8. Consideraciones importantes
-
-🔹 El sorteo es por persona, no por boleto.
-
-🔹 Tener más boletos no aumenta la probabilidad de ganar.
-
-🔹 Una persona no puede ganar más de una vez.
-
-🔹 El sistema es completamente aleatorio.
-
-9. Posibles mejoras futuras
-
-Normalizar nombres (mayúsculas/minúsculas).
-
-Realizar el sorteo por boleto en lugar de por persona.
-
-Guardar los resultados en un archivo.
-
-Evitar que una persona gane en sorteos consecutivos.
+Persona: Ana | Boleto ganador: 10
+Persona: Tania | Boleto ganador: 7
+Persona: Manuel | Boleto ganador: 11
